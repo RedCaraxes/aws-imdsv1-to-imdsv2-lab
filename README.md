@@ -1,5 +1,17 @@
 # IMDSv1 -> IMDSv2 Terraform Lab
 
+> ⚠️ **Security Disclaimer**
+>
+> This lab intentionally deploys a **vulnerable application** for educational purposes. The EC2 instance runs an SSRF-susceptible endpoint that can be used to query the AWS Instance Metadata Service (IMDS).
+>
+> - **Deploy only in a dedicated, isolated AWS account** — never in a production or shared environment.
+> - The `allowed_cidr` variable restricts access to your IP only. Do not set it to `0.0.0.0/0`.
+> - The IAM role attached to the instance has no resource permissions by design, but IMDS access can still expose instance identity and temporary credentials if the role is modified.
+> - **Run `terraform destroy` immediately after finishing** to avoid leaving a vulnerable workload running.
+> - Do not share, publish, or commit any output that contains real temporary credentials, instance IDs, or public IPs from your deployment.
+>
+> This project is intended solely for learning how to detect and remediate IMDSv1 usage. Any use outside of a controlled lab environment is your own responsibility.
+
 This lab creates:
 
 - One VPC and public subnet
