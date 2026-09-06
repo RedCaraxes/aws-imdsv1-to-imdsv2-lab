@@ -1,0 +1,50 @@
+# Terraform local directory
+.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+
+# Terraform variable files
+# These can contain account-specific values, IPs, credentials, etc.
+*.tfvars
+*.tfvars.json
+
+# Keep example variable files
+!*.tfvars.example
+
+# Terraform plan files
+*.tfplan
+tfplan
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+# Local environment files
+.env
+.env.*
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Terraform variable files
+*.tfvars
+*.tfvars.json
+
+# Keep examples
+!*.tfvars.example
