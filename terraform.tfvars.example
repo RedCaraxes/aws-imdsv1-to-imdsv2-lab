@@ -4,4 +4,4 @@ allowed_cidr = "TU_IP_REAL_PUBLICA/32"
 # Phase 1 - IMDSv1 and IMDSv2 are both accepted.
 http_tokens = "optional"
 
-instance_type = "t3.micro"
+instance_type = "t3.nano"

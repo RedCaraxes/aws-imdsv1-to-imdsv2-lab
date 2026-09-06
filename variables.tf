@@ -23,7 +23,7 @@ variable "allowed_cidr" {
 variable "instance_type" {
   description = "EC2 instance type used by the lab."
   type        = string
-  default     = "t3.micro"
+  default     = "t3.nano"
 }
 
 variable "http_tokens" {
