@@ -31,7 +31,16 @@ HttpTokens = optional
 
 so both IMDSv1 and IMDSv2 can be tested.
 
-## 1. Configure
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/RedCaraxes/aws-imdsv1-to-imdsv2-lab.git
+cd aws-imdsv1-to-imdsv2-lab
+```
+
+## 2. Configure
+
+Create your Terraform variables file:
 
 ```bash
 cp terraform.tfvars.example terraform.tfvars
@@ -45,21 +54,41 @@ Example:
 allowed_cidr = "203.0.113.10/32"
 ```
 
-## 2. Deploy
+The lab starts with:
+
+```hcl
+http_tokens = "optional"
+```
+
+This allows both IMDSv1 and IMDSv2 during the first phase of the lab.
+
+## 3. Deploy
+
+Initialize Terraform:
 
 ```bash
 terraform init
+```
+
+Review the deployment plan:
+
+```bash
 terraform plan
+```
+
+Deploy the infrastructure:
+
+```bash
 terraform apply
 ```
 
-Get the generated commands:
+Get the generated test commands:
 
 ```bash
 terraform output test_commands
 ```
 
-## 3. Phase 1 - IMDSv1 allowed
+## 4. Phase 1 - IMDSv1 allowed
 
 Test the application:
 
@@ -95,7 +124,7 @@ Do not publish real temporary credentials if you test the credential path.
 
 The CloudWatch dashboard should start showing `MetadataNoToken` after IMDSv1 requests are emitted.
 
-## 4. Phase 2 - Require IMDSv2
+## 5. Phase 2 - Require IMDSv2
 
 Change:
 
@@ -109,15 +138,16 @@ to:
 http_tokens = "required"
 ```
 
-Then:
+Then apply the change:
 
 ```bash
+terraform plan
 terraform apply
 ```
 
 This updates the instance metadata option in place.
 
-Re-run:
+Re-run the legacy request:
 
 ```bash
 curl http://PUBLIC_IP:8080/legacy
@@ -141,7 +171,9 @@ curl http://PUBLIC_IP:8080/v2
 
 CloudWatch can now show `MetadataNoTokenRejected` for rejected IMDSv1 attempts.
 
-## 5. Cleanup
+## 6. Cleanup
+
+Destroy all resources created by Terraform:
 
 ```bash
 terraform destroy
